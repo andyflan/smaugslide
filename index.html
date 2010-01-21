@@ -1,0 +1,208 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<meta http-equiv="content-language" content="en" />
+	
+		<title>SmaugSlide Demo</title>	
+
+		<link rel="stylesheet" type="text/css" media="screen, projection" href="css/reset.css" />
+		<link rel="stylesheet" type="text/css" media="screen, projection" href="css/smaug.css" />
+		<link rel="stylesheet" type="text/css" media="screen, projection" href="css/screen.css" />
+
+		<script type="text/javascript" src="js/jquery-1.3.2.min.js"></script>
+		<script type="text/javascript" src="js/jquery.easing.1.3.js"></script>
+		<script type="text/javascript" src="js/jquery.smaugSlide-1.15.js"></script>
+		
+		<script type="text/javascript">
+			$('document').ready(function() {
+				//simple
+				$('.slide-container1 ul').smaugSlide();
+				
+				//different options plus secondary navigation and autoScroll on
+				$('.slide-container2 ul.controls').smaugSlide({
+					slideHeight: 400,
+					easing: 'easeOutBounce',
+					duration: 500,
+					autoScroll: true,
+					secondaryNavigation: '.slide-container2 ul.secondary',
+					actionButtonContent: '<strong>Click</strong> me to view'
+				});
+				
+				//simple with more info div and autoScroll on
+				$('.slide-container3 ul').smaugSlide({
+					slideHeight: 400,
+					autoScroll: true,
+					moreInfoDiv: '.more-info'
+				});
+			});
+		</script>
+	</head>
+
+	<body>
+	
+		<div id="container">
+			<h1>Smaug Slide Demo</h1>
+			
+			<h2>Simple Demo</h2>
+			
+			<div class="slide-container1">
+				<ul>
+					<li><a href="gallery/1.jpg" title="Slide One"></a></li>
+					<li><a href="gallery/2.jpg" title="Slide Two" rel="http://www.google.com"></a></li>
+					<li><a href="gallery/3.jpg" title="Slide Three" rel="http://www.google.com"></a></li>
+					<li><a href="gallery/4.jpg" title="Slide Four" rel="http://www.google.com"></a></li>
+					<li><a href="gallery/5.jpg" title="Slide Five" rel="http://www.google.com"></a></li>
+					<li><a href="gallery/6.jpg" title="Slide Six" rel="http://www.google.com"></a></li>
+					<li><a href="gallery/7.jpg" title="Slide Seven" rel="http://www.google.com"></a></li>
+					<li><a href="gallery/8.jpg" title="Slide Eight" rel="http://www.google.com"></a></li>
+					<li><a href="gallery/9.jpg" title="Slide Nine" rel="http://www.google.com"></a></li>
+				</ul>
+			</div>
+			
+			<hr />
+			
+			<h2>Different options plus secondary navigation and autoScroll on</h2>
+			
+			<div class="slide-container2">
+				<ul class="controls">
+					<li><a href="gallery/1.jpg" title="Slide One" rel="http://www.google.com"></a></li>
+					<li><a href="gallery/2.jpg" title="Slide Two" rel="http://www.google.com"></a></li>
+					<li><a href="gallery/3.jpg" title="Slide Three" rel="http://www.google.com"></a></li>
+					<li><a href="gallery/4.jpg" title="Slide Four" rel="http://www.google.com"></a></li>
+					<li><a href="gallery/5.jpg" title="Slide Five" rel="http://www.google.com"></a></li>
+					<li><a href="gallery/6.jpg" title="Slide Six" rel="http://www.google.com"></a></li>
+					<li><a href="gallery/7.jpg" title="Slide Seven" rel="http://www.google.com"></a></li>
+					<li><a href="gallery/8.jpg" title="Slide Eight" rel="http://www.google.com"></a></li>
+					<li><a href="gallery/9.jpg" title="Slide Nine" rel="http://www.google.com"></a></li>
+				</ul>
+				
+				<ul class="secondary">
+					<li><a href="#1" title="Slide One" rel="http://www.google.com"><img src="gallery/1-t.jpg" alt="Slide One" /></a></li>
+					<li><a href="#2" title="Slide Two" rel="http://www.google.com"><img src="gallery/2-t.jpg" alt="Slide Two" /></a></li>
+					<li><a href="#3" title="Slide Three" rel="http://www.google.com"><img src="gallery/3-t.jpg" alt="Slide Three" /></a></li>
+					<li><a href="#4" title="Slide Four" rel="http://www.google.com"><img src="gallery/4-t.jpg" alt="Slide Four" /></a></li>
+					<li><a href="#5" title="Slide Five" rel="http://www.google.com"><img src="gallery/5-t.jpg" alt="Slide Five" /></a></li>
+					<li><a href="#6" title="Slide Six" rel="http://www.google.com"><img src="gallery/6-t.jpg" alt="Slide Six" /></a></li>
+					<li><a href="#7" title="Slide Seven" rel="http://www.google.com"><img src="gallery/7-t.jpg" alt="Slide Seven" /></a></li>
+					<li><a href="#8" title="Slide Eight" rel="http://www.google.com"><img src="gallery/8-t.jpg" alt="Slide Eight" /></a></li>
+					<li><a href="#9" title="Slide Nine" rel="http://www.google.com"><img src="gallery/9-t.jpg" alt="Slide Nine" /></a></li>
+				</ul>
+			</div>
+			
+			<hr />
+			
+			<a name="more-info"></a>
+			<h2>Simple with more info div and autoScroll on</h2>
+			
+			<div class="more-info"></div>
+			
+			<div class="slide-container3">
+				<ul>
+					<li>
+						<a href="gallery/1.jpg" title="Slide One" rel="http://www.google.com"></a>
+						
+						<div>
+							<h3><a href="http://www.google.com/" title="Google">Lorem ipsum dolor sit</a></h3> 
+							
+							<p>amet, consectetur adipiscing elit. Pellentesque eu bibendum mi. Class aptent taciti sociosqu ad 
+							litora torquent per conubia nostra, per inceptos himenaeos. Etiam</p>
+						</div>
+					</li>
+					
+					<li>
+						<a href="gallery/2.jpg" title="Slide Two" rel="http://www.google.com"></a>
+
+						<div>
+							<h3>interdum, est ut tincid</h3> 
+							
+							<p>fermentum eleifend. Phasellus rutrum odio tincidunt felis rutrum dictum. Donec in sollicitudin 
+							quam. Aliquam commodo magna nec quam ultricies</p>
+						</div>
+					</li>
+					
+					<li>
+						<a href="gallery/3.jpg" title="Slide Three" rel="http://www.google.com"></a>
+
+						<div>
+							<h3>Fusce placerat</h3> 
+							
+							<p>Suspendisse potenti. Vestibulum quis enim eu sapien fringilla ultricies. Integer adipiscing 
+							faucibus magna, id imperdiet massa ullamcorper tincidunt.</p>							
+						</div>
+					</li>
+					
+					<li>
+						<a href="gallery/4.jpg" title="Slide Four" rel="http://www.google.com"></a>
+							
+						<div>
+							<h3>Vestibulum quis enim</h3> 
+							
+							<p>amet, consectetur adipiscing elit. Pellentesque eu bibendum mi. Class aptent taciti sociosqu ad 
+							litora torquent per conubia nostra, per inceptos himenaeos. Etiam</p>						
+						</div>
+					</li>
+					
+					<li>
+						<a href="gallery/5.jpg" title="Slide Five" rel="http://www.google.com"></a>
+							
+						<div>
+							<h3>consectetur adipiscing</h3> 
+							
+							<p>amet, consectetur adipiscing elit. Pellentesque eu bibendum mi. Class aptent taciti sociosqu ad 
+							litora torquent per conubia nostra, per inceptos himenaeos. Etiam</p>
+						</div>						
+					</li>
+					
+					<li>
+						<a href="gallery/6.jpg" title="Slide Six" rel="http://www.google.com"></a>
+							
+						<div>
+							<h3>Lorem ipsum dolor sit</h3> 
+							
+							<p>amet, consectetur adipiscing elit. Pellentesque eu bibendum mi. Class aptent taciti sociosqu ad 
+							litora torquent per conubia nostra, per inceptos himenaeos. Etiam</p>
+						</div>
+					</li>
+					
+					<li>
+						<a href="gallery/7.jpg" title="Slide Seven" rel="http://www.google.com"></a>
+							
+						<div>
+							<h3>consectetur adipiscing</h3>
+							
+							<p>amet, consectetur adipiscing elit. Pellentesque eu bibendum mi. Class aptent taciti sociosqu ad 
+							litora torquent per conubia nostra, per inceptos himenaeos. Etiam</p>						
+						</div>					
+					</li>
+					
+					<li>
+						<a href="gallery/8.jpg" title="Slide Eight" rel="http://www.google.com"></a>
+							
+						<div>
+							<h3>Lorem ipsum dolor sit</h3> 
+							
+							<p>amet, consectetur adipiscing elit. Pellentesque eu bibendum mi. Class aptent taciti sociosqu ad 
+							litora torquent per conubia nostra, per inceptos himenaeos. Etiam</p>						
+						</div>						
+					</li>
+					
+					<li>
+						<a href="gallery/9.jpg" title="Slide Nine" rel="http://www.google.com"></a>
+
+						<div>
+							<h3>consectetur adipiscing</h3> 
+							
+							<p>amet, consectetur adipiscing elit. Pellentesque eu bibendum mi. Class aptent taciti sociosqu ad 
+							litora torquent per conubia nostra, per inceptos himenaeos. Etiam</p>						
+						</div>					
+					</li>
+				</ul>
+			</div>
+			
+			<hr />
+			
+		</div>
+
+	</body>
+</html>
