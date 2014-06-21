@@ -2,7 +2,7 @@
   "name": "smaugslide",
   "description": "Simple and old jQuery slide plugin - updated for responsive",
   "repository": "github.com:andyflan/smaugslide.git",
-  "version": "1.2",
+  "version": "1.2.0",
   "devDependencies": {
     "node-sass": "~0.7.0",
     "grunt": "~0.4.1",

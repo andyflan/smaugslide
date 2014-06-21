@@ -7,36 +7,8 @@
 		<title>SmaugSlide Demo</title>	
 
 		<link rel="stylesheet" type="text/css" media="screen, projection" href="css/reset.css" />
-		<link rel="stylesheet" type="text/css" media="screen, projection" href="css/smaug.css" />
+		<link rel="stylesheet" type="text/css" media="screen, projection" href="css/smaugslide.css" />
 		<link rel="stylesheet" type="text/css" media="screen, projection" href="css/screen.css" />
-
-		<script type="text/javascript" src="js/jquery-1.3.2.min.js"></script>
-		<script type="text/javascript" src="js/jquery.easing.1.3.js"></script>
-		<script type="text/javascript" src="js/jquery.smaug-slide.js"></script>
-		
-		<script type="text/javascript">
-			$('document').ready(function() {
-				//simple
-				$('.slide-container1 ul').smaugSlide();
-				
-				//different options plus secondary navigation and autoScroll on
-				$('.slide-container2 ul.controls').smaugSlide({
-					slideHeight: 400,
-					easing: 'easeOutBounce',
-					duration: 500,
-					autoScroll: true,
-					secondaryNavigation: '.slide-container2 ul.secondary',
-					actionButtonContent: '<strong>Click</strong> me to view'
-				});
-				
-				//simple with more info div and autoScroll on
-				$('.slide-container3 ul').smaugSlide({
-					slideHeight: 400,
-					autoScroll: true,
-					moreInfoDiv: '.more-info'
-				});
-			});
-		</script>
 	</head>
 
 	<body>
@@ -203,6 +175,36 @@
 			<hr />
 			
 		</div>
+
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')</script>
+
+		<script type="text/javascript" src="js/jquery.easing.1.3.js"></script>
+		<script type="text/javascript" src="js/jquery.smaug-slide.js"></script>
+		
+		<script type="text/javascript">
+			$('document').ready(function() {
+				//simple
+				$('.slide-container1 ul').smaugSlide();
+				
+				//different options plus secondary navigation and autoScroll on
+				$('.slide-container2 ul.controls').smaugSlide({
+					slideHeight: 400,
+					easing: 'easeOutBounce',
+					duration: 500,
+					autoScroll: true,
+					secondaryNavigation: '.slide-container2 ul.secondary',
+					actionButtonContent: '<strong>Click</strong> me to view'
+				});
+				
+				//simple with more info div and autoScroll on
+				$('.slide-container3 ul').smaugSlide({
+					slideHeight: 400,
+					autoScroll: true,
+					moreInfoDiv: '.more-info'
+				});
+			});
+		</script>
 
 	</body>
 </html>
