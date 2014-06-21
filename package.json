@@ -1,0 +1,14 @@
+{
+  "name": "smaugslide",
+  "description": "Simple and old jQuery slide plugin - updated for responsive",
+  "repository": "github.com:andyflan/smaugslide.git",
+  "version": "1.2",
+  "devDependencies": {
+    "node-sass": "~0.7.0",
+    "grunt": "~0.4.1",
+    "grunt-contrib-watch": "~0.5.3",
+    "grunt-sass": "~0.8.0",
+    "grunt-contrib-connect": "~0.7.1",
+    "grunt-concurrent": "~0.5.0"
+  }
+}
