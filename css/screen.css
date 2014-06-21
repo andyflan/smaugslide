@@ -2,14 +2,16 @@
   width: 600px;
   margin: 20px auto;
   font-family: arial; }
+  .container hr {
+    clear: both;
+    margin: 15px 0; }
+  .container h1, .container h2 {
+    margin: 10px 0;
+    clear: both; }
 
-hr {
-  clear: both;
-  margin: 15px 0; }
-
-h1, h2 {
-  margin: 10px 0;
-  clear: both; }
+.slide-container3 {
+  float: left;
+  width: 403px; }
 
 .more-info {
   float: left;
@@ -17,16 +19,10 @@ h1, h2 {
   padding: 15px;
   margin-right: 15px;
   border: 1px solid #999999; }
-
-.more-info h3 {
-  font-family: georgia, serif;
-  font-style: italic;
-  color: #666666;
-  margin-bottom: 15px; }
-
-.more-info p {
-  line-height: 1.5em; }
-
-.slide-container3 {
-  float: left;
-  width: 403px; }
+  .more-info h3 {
+    font-family: georgia, serif;
+    font-style: italic;
+    color: #666666;
+    margin-bottom: 15px; }
+  .more-info p {
+    line-height: 1.5em; }
