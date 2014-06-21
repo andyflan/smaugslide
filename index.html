@@ -1,10 +1,14 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<!DOCTYPE html>
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]><html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]><html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+<!--<![endif]-->
 	<head>
-		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-		<meta http-equiv="content-language" content="en" />
+    	<meta charset="utf-8">
 	
-		<title>SmaugSlide Demo</title>	
+		<title>Smaugslide Demo</title>	
 
 		<link rel="stylesheet" type="text/css" media="screen, projection" href="css/reset.css" />
 		<link rel="stylesheet" type="text/css" media="screen, projection" href="css/smaugslide.css" />
@@ -13,7 +17,7 @@
 
 	<body>
 	
-		<div id="container">
+		<div class="container">
 			<h1>Smaug Slide Demo</h1>
 			
 			<h2>Simple Demo</h2>
@@ -180,15 +184,15 @@
         <script>window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')</script>
 
 		<script type="text/javascript" src="js/jquery.easing.1.3.js"></script>
-		<script type="text/javascript" src="js/jquery.smaug-slide.js"></script>
+		<script type="text/javascript" src="js/jquery.smaugslide.js"></script>
 		
 		<script type="text/javascript">
 			$('document').ready(function() {
 				//simple
-				$('.slide-container1 ul').smaugSlide();
+				$('.slide-container1 ul').smaugslide();
 				
 				//different options plus secondary navigation and autoScroll on
-				$('.slide-container2 ul.controls').smaugSlide({
+				$('.slide-container2 ul.controls').smaugslide({
 					slideHeight: 400,
 					easing: 'easeOutBounce',
 					duration: 500,
@@ -198,7 +202,7 @@
 				});
 				
 				//simple with more info div and autoScroll on
-				$('.slide-container3 ul').smaugSlide({
+				$('.slide-container3 ul').smaugslide({
 					slideHeight: 400,
 					autoScroll: true,
 					moreInfoDiv: '.more-info'
