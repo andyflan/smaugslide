@@ -68,71 +68,59 @@ Smaugslide = function(element, options) {
 		
 	this.options = options;
 
-	this.init();
-}
-
-Smaugslide.prototype.init = function() { };
-
-(function($) {
-	/*
-	 *	Index of currently active slide
-	 */
-
-	Smaugslide.prototype.active_index = null;
-
-	/*
-	 *	A place to store with current width of the component, used by responsive support
-	 */
-
-	Smaugslide.prototype.component_width = null;
-
-	/*
-	 *	A place to store with current width of the slider container, used by responsive support
-	 */
-
-	Smaugslide.prototype.strip_width = null;
-
-	/*
-	 *	Timer used for autoscroll
-	 */
-
-	Smaugslide.prototype.slide_timer = null;
-
-	/*
-	 *	A container for slider elements
-	 */
-
-	Smaugslide.prototype.elements = {
+	this.elements = {
 		slides_container:  null,
 		main_navigation_container: null,
 		secondary_controls:  null,
 		previous:  null,
 		next:  null
-	}
+	};
 
-	Smaugslide.prototype.init = function() {
+	this.active_index = 0;
+
+	this.component_width = null;
+
+	this.strip_width = null;
+
+	this.slide_timer = null;
+
+	this._init();
+}
+
+/*
+ *	An init function
+ */
+
+Smaugslide.prototype._init = function() { };
+
+//do all the jquery stuff inside the jquery closure
+(function($) {
+	Smaugslide.prototype._init = function() {
 		var that = this;
 		
-		this.elements.main_navigation_container = $(this.element);
+		//add the class to the container
+		$(this.element).addClass(this.options.baseClassName);
+
+		//assign the main nav container
+		this.elements.main_navigation_container = $(this.element).find('ul');
 
 		//create the new slide container element
 		this.elements.slides_container = $('<ul class="' + this.options.baseClassName + '-slides"></ul>');
 		
 		//wrap the slide controls and add the slide container
-		$(this.element)
-			.wrap('<div class="' + this.options.baseClassName + '"></div>')
+		$(this.elements.main_navigation_container)
 			.addClass(this.options.baseClassName + '-slide-controls')
 			.before(this.elements.slides_container);
 
 		//iterate through all the slide controls, creating the slides
-		$(this.element).children('li').each(function(index, item) {
-			that.create_slide(item, index);
+		$(this.elements.main_navigation_container).children('li').each(function(index, item) {
+			that._create_slide(item, index);
 		});
 
 		//if we're using next/prev create the links
 		if (this.options.useNextPrevNav) {
-			this.elements.previous = $('<a href="#" class="nav previous" rel="previous"></a>');
-			this.elements.next = $('<a href="#" class="nav next" rel="next"></a>');
+			this.elements.previous = $('<a href="#" class="nav previous" rel="previous"><span></span></a>');
+			this.elements.next = $('<a href="#" class="nav next" rel="next"><span></span></a>');
 			
 			$(this.elements.slides_container).parent().append(this.elements.previous).append(this.elements.next);
 		}
@@ -149,21 +137,21 @@ Smaugslide.prototype.init = function() { };
 			}, this.options.pause);
 		}
 
-		this.attach_events();
+		this._attach_events();
 
-		this.check_metrics();
+		this.checkMetrics();
 		
 		//click the first slide
-		$(this.element).find('li:first a').trigger('click');
+		$(this.elements.main_navigation_container).find('li:first a').trigger('click');
 	}	
 
-	Smaugslide.prototype.attach_events = function() {
+	Smaugslide.prototype._attach_events = function() {
 		var that = this;
 
 		//main nav item click event
 		this.elements.main_navigation_container.find('a').on('click', function(event) {
 			//work out which one we've clicked on
-			var i = $(that.element).find('li').index($(this).parent());
+			var i = $(that.elements.main_navigation_container).find('li').index($(this).parent());
 
 			event.preventDefault();
 
@@ -174,7 +162,7 @@ Smaugslide.prototype.init = function() { };
 		//next/prev links click events
 		$(this.element).find('a.nav').on('click', function(event) {
 			event.preventDefault();
-			
+
 			that.moveTo($(this).attr('rel'));
 		});
 
@@ -186,7 +174,7 @@ Smaugslide.prototype.init = function() { };
 			event.preventDefault();
 
 			//trigger click on corresponding nav element
-			$(that.element).children('li').eq(i).find('a').trigger('click');
+			$(that.elements.main_navigation_container).find('li').eq(i).find('a').trigger('click');
 		});
 
 		//autoscroll hover
@@ -202,11 +190,11 @@ Smaugslide.prototype.init = function() { };
 
 		//window resize
 		$(window).on('resize', function(event) {
-			that.check_metrics();
+			that.checkMetrics();
 		});
 	}
 
-	Smaugslide.prototype.create_slide = function(input, index) {
+	Smaugslide.prototype._create_slide = function(input, index) {
 		var that = this,
 			a = $(input).find('a'),
 			more = $(input).find(that.options.moreInfoContaienerSelector),
@@ -221,35 +209,15 @@ Smaugslide.prototype.init = function() { };
 		//insert the slide number
 		$(a).empty().html(index+1);
 		
-		//work out positioning for the span in the middle of the link
-		var spanLeft = (this.component_width / 2) - ((that.options.actionButtonWidth + (that.options.actionButtonPadding * 2)) / 2);
-		var spanTop = (that.options.slideHeight / 2) - ((that.options.actionButtonHeight + (that.options.actionButtonPadding * 2)) / 2);
-		
 		//make the main link and setup the fade in/out of the span
 		if ($(a).attr('rel') !== '') {
 			var elJumpLink = $('<a></a>').attr({
-				href: $(a).attr('rel'),
-				title: $(a).attr('title')
-			}).css({
-				height: that.options.slideHeight + 'px'
-			}).hover(function() {
-				$(this).find('span').fadeIn();	
-			}, function() {
-				$(this).find('span').fadeOut();
-			});
+				"href": $(a).attr('rel'),
+				"title": $(a).attr('title')
+			})
 		
 			//make the span that holds the button graphic
-			var elSpan = $('<span></span>').css({
-				padding: that.options.actionButtonPadding + 'px',
-				width: that.options.actionButtonWidth + 'px',
-				height: that.options.actionButtonHeight + 'px',
-				left: spanLeft + 'px',
-				top: spanTop + 'px'
-			}).html(that.options.actionButtonContent).hover(function() {
-				$(a).addClass(that.options.baseClassName + '-hover');
-			}, function() {
-				$(a).removeClass(that.options.baseClassName + '-hover');
-			});
+			var elSpan = $('<span></span>').html(that.options.actionButtonContent);
 			
 			//slap it all together and add all the markup
 			$(elJumpLink).append(elSpan);
@@ -290,11 +258,11 @@ Smaugslide.prototype.init = function() { };
 		$(that.elements.slides_container).append(this_slide);
 	}
 
-	Smaugslide.prototype.check_metrics = function() {
+	Smaugslide.prototype.checkMetrics = function() {
 		var offset = -(this.active_index * this.component_width);
 
-		this.component_width = $(this.element).parent().width();
-		this.strip_width = this.component_width * $(this.element).children('li').length;
+		this.component_width = $(this.element).width();
+		this.strip_width = this.component_width * $(this.elements.main_navigation_container).find('li').length;
 		
 		//apply height and width to slide container
 		$(this.elements.slides_container).css({
@@ -313,36 +281,36 @@ Smaugslide.prototype.init = function() { };
 	Smaugslide.prototype.moveTo = function(i) {
 		var that = this;
 
-		//get the current slide and remove the active class
-		var currentSlide = $(this.element).find('li.' + this.options.activeClassName).removeClass(this.options.activeClassName);
+		//remove the active class from the current slide
+		$(this.elements.main_navigation_container).find('li.' + this.options.activeClassName).removeClass(this.options.activeClassName);
 
 		//do the same for secondary navigation if we're using it
 		if (this.options.secondaryNavigation) {
 			$(this.elements.secondary_controls).find('li.' + this.options.activeClassName).removeClass(this.options.activeClassName);	
 		}
-		
+
 		//if its a keyword rather than an int work out what it should be as an int
 		if (i == 'first') {
 			i = 0;
 		} else if (i == 'previous') {
-			if (this.active_index == 0) {	
+			if (this.active_index === 0) {	
 				i = $(this.elements.main_navigation_container).find('li').length - 1;
 			} else {
-				i == this.active_index--;
+				i = this.active_index - 1;
 			}
 		} else if (i == 'next') {
 			i = this.active_index;
-			if (i == ($(this.element).find('li').length - 1)) {
+			if (i == $(this.elements.main_navigation_container).find('li').length - 1) {
 				i = 0;
 			} else {
-				i++;
+				i = this.active_index + 1;
 			}
 		} else if (i == 'last') {
-			i = $(this.element).find('li').length - 1;
+			i = $(this.elements.main_navigation_container).find('li').length - 1;
 		}
-		
+
 		//get the next slide and add the active class to it
-		var nextSlide = $(this.element).find('li').eq(i).addClass(this.options.activeClassName);
+		var nextSlide = $(this.elements.main_navigation_container).find('li').eq(i).addClass(this.options.activeClassName);
 
 		//do the same for secondary navigation if we're using it
 		if (this.options.secondaryNavigation) {
@@ -359,6 +327,7 @@ Smaugslide.prototype.init = function() { };
 		}
 		
 		//perform the animation and fade in the more info div content if we're using it
+		console.log(this.elements.slides_container.closest('.smaug'));
 		$(this.elements.slides_container).animate({ marginLeft: offset }, { 
 			duration: this.options.duration, 
 			easing: this.options.effect,
@@ -377,25 +346,52 @@ Smaugslide.prototype.init = function() { };
 	}
 
 	$.fn.smaugslide = function(options) {
-		var opts = $.extend({}, $.fn.smaugslide.defaults, options);
-		
+		var args = arguments;
+
 		this.each(function(i, element) {
-			new Smaugslide(element, opts);
+			var component;
+
+			if (!$(element).data('component')) {
+				//merge the default options
+				var opts = $.extend({}, $.fn.smaugslide.defaults, options);
+
+				//initialise the component
+				component = new Smaugslide(element, opts);
+
+				//and store it in the dom for later
+				$(element).data('component', component);
+			} else {
+				//already initialised
+				component = $(element).data('component');
+
+				//if the options function param was a string
+				if (args[0].constructor == String) {
+					//then if we have a public function of that name
+					if (typeof component[args[0]] == 'function' && args[0].charAt(0) !== '_') {
+						//remove the first inward argument
+						args = Array.prototype.slice.call(args, 1);
+
+						//and call it
+						component[options].apply(component, args);
+					} else {
+						//Otherwise we don't know what you're doing
+						console.log('Unknown public function: ' + args[0]);
+					}
+				}
+			}
+
 		});
 	};
 	 
 	$.fn.smaugslide.defaults = {
 		baseClassName: 'smaug',
 		activeClassName: 'active',
-		slideHeight: 300,
+		slideHeight: 400,
 		easing: 'linear',
 		duration: 500,
 		autoScroll: false,
 		pause: 5000,
 		secondaryNavigation: null,
-		actionButtonHeight: 42,
-		actionButtonWidth: 142,
-		actionButtonPadding: 20,
 		actionButtonContent: 'Click to view',
 		moreInfoContaienerSelector: 'div',
 		moreInfoDiv: '',
