@@ -35,13 +35,15 @@
 					<li><a href="gallery/9.jpg" title="Slide Nine" rel="http://www.google.com"></a></li>
 				</ul>
 			</div>
-			
+				
+			<p><a href="#" class="move-next">Move Next</a></p>
+
 			<hr />
 			
 			<h2>Different options plus secondary navigation and autoScroll on</h2>
 			
 			<div class="slide-container2">
-				<ul class="controls">
+				<ul>
 					<li><a href="gallery/1.jpg" title="Slide One" rel="http://www.google.com"></a></li>
 					<li><a href="gallery/2.jpg" title="Slide Two" rel="http://www.google.com"></a></li>
 					<li><a href="gallery/3.jpg" title="Slide Three" rel="http://www.google.com"></a></li>
@@ -52,19 +54,19 @@
 					<li><a href="gallery/8.jpg" title="Slide Eight" rel="http://www.google.com"></a></li>
 					<li><a href="gallery/9.jpg" title="Slide Nine" rel="http://www.google.com"></a></li>
 				</ul>
-				
-				<ul class="secondary">
-					<li><a href="#1" title="Slide One" rel="http://www.google.com"><img src="gallery/1-t.jpg" alt="Slide One" /></a></li>
-					<li><a href="#2" title="Slide Two" rel="http://www.google.com"><img src="gallery/2-t.jpg" alt="Slide Two" /></a></li>
-					<li><a href="#3" title="Slide Three" rel="http://www.google.com"><img src="gallery/3-t.jpg" alt="Slide Three" /></a></li>
-					<li><a href="#4" title="Slide Four" rel="http://www.google.com"><img src="gallery/4-t.jpg" alt="Slide Four" /></a></li>
-					<li><a href="#5" title="Slide Five" rel="http://www.google.com"><img src="gallery/5-t.jpg" alt="Slide Five" /></a></li>
-					<li><a href="#6" title="Slide Six" rel="http://www.google.com"><img src="gallery/6-t.jpg" alt="Slide Six" /></a></li>
-					<li><a href="#7" title="Slide Seven" rel="http://www.google.com"><img src="gallery/7-t.jpg" alt="Slide Seven" /></a></li>
-					<li><a href="#8" title="Slide Eight" rel="http://www.google.com"><img src="gallery/8-t.jpg" alt="Slide Eight" /></a></li>
-					<li><a href="#9" title="Slide Nine" rel="http://www.google.com"><img src="gallery/9-t.jpg" alt="Slide Nine" /></a></li>
-				</ul>
 			</div>
+
+			<ul class="secondary">
+				<li><a href="#1" title="Slide One" rel="http://www.google.com"><img src="gallery/1-t.jpg" alt="Slide One" /></a></li>
+				<li><a href="#2" title="Slide Two" rel="http://www.google.com"><img src="gallery/2-t.jpg" alt="Slide Two" /></a></li>
+				<li><a href="#3" title="Slide Three" rel="http://www.google.com"><img src="gallery/3-t.jpg" alt="Slide Three" /></a></li>
+				<li><a href="#4" title="Slide Four" rel="http://www.google.com"><img src="gallery/4-t.jpg" alt="Slide Four" /></a></li>
+				<li><a href="#5" title="Slide Five" rel="http://www.google.com"><img src="gallery/5-t.jpg" alt="Slide Five" /></a></li>
+				<li><a href="#6" title="Slide Six" rel="http://www.google.com"><img src="gallery/6-t.jpg" alt="Slide Six" /></a></li>
+				<li><a href="#7" title="Slide Seven" rel="http://www.google.com"><img src="gallery/7-t.jpg" alt="Slide Seven" /></a></li>
+				<li><a href="#8" title="Slide Eight" rel="http://www.google.com"><img src="gallery/8-t.jpg" alt="Slide Eight" /></a></li>
+				<li><a href="#9" title="Slide Nine" rel="http://www.google.com"><img src="gallery/9-t.jpg" alt="Slide Nine" /></a></li>
+			</ul>
 			
 			<hr />
 			
@@ -189,20 +191,26 @@
 		<script type="text/javascript">
 			$('document').ready(function() {
 				//simple
-				$('.slide-container1 ul').smaugslide();
+				$('.slide-container1').smaugslide();
+
+				$('.move-next').on('click', function(event) {
+					event.preventDefault();
+
+					$('.slide-container1').smaugslide('moveTo', 'next');
+				})
 				
 				//different options plus secondary navigation and autoScroll on
-				$('.sslide-container2 ul.controls').smaugslide({
+				$('.slide-container2').smaugslide({
 					slideHeight: 400,
 					easing: 'easeOutBounce',
 					duration: 500,
 					autoScroll: true,
-					secondaryNavigation: '.slide-container2 ul.secondary',
+					secondaryNavigation: '.slide-container2 ~ ul.secondary',
 					actionButtonContent: '<strong>Click</strong> me to view'
 				});
 				
 				//simple with more info div and autoScroll on
-				$('.sslide-container3 ul').smaugslide({
+				$('.slide-container3').smaugslide({
 					slideHeight: 400,
 					autoScroll: true,
 					moreInfoDiv: '.more-info'
